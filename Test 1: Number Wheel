@@ -1,0 +1,5 @@
+import random
+range = input("please input a range of integers")
+
+def spin_wheel(number):
+  random_number = randint(
