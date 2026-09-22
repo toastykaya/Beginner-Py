@@ -1,0 +1,62 @@
+import numpy as np
+import math
+height = 9 
+width = 21
+y = height
+x = width
+background = " "
+wall = "#"
+array = np.full((y,x),background,dtype="U1")
+
+#draw walls
+def walls():
+  for i in range(y):
+    for j in range(x):
+      if i ==0 or i ==y-1:
+        array[i,j] = wall
+      elif j == 0 or j == x-1:
+        array[i,j] = wall
+
+#print result
+def print_box():
+  for i in range(y):
+    for j in range(x):
+      print(array[i,j], end= "")
+    print("\n", end = "")
+
+#define char cords
+centre = math.floor(x/2)
+char = "o"
+ya = y-2
+xa = centre
+
+def character():
+  array[ya,xa] = char
+
+walls()
+character()
+print_box()
+
+#moving the char
+while True:
+  move = input("\na=left,d=right,w=up,s=down").strip().lower()
+  new_xa, new_ya = xa, ya
+  if move =="a":
+    new_xa -= 1
+  elif move == "d":
+    new_xa += 1
+  elif move == "w":
+    new_ya -= 1
+  elif move == "s":
+    new_ya += 1
+
+#ensuring char doesnt clip through wall
+if array[new_ya, new_xa] != wall:
+      array[ya,xa] = background
+      xa, ya = new_xa, new_ya
+      character()
+
+print_box()
+  
+
+    
