@@ -1,5 +1,78 @@
 import random
-range = input("please input a range of integers")
+import tkinter as GUI
+import math
 
-def spin_wheel(number):
-  random_number = randint(
+# Colours for the wheel
+colours = [
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "blue",
+    "purple",
+    "pink",
+    "cyan"
+]
+
+# Create window
+window = GUI.Tk()
+window.title("Random Colour Selector")
+window.geometry("500x600")
+
+canvas = GUI.Canvas(window, width=500, height=500)
+canvas.pack()
+
+# Centre and radius of wheel
+cx = 250
+cy = 250
+radius = 200
+
+# Angle of each section
+section_angle = 360 / len(colours)
+
+# Draw the wheel
+for i, colour in enumerate(colours):
+    start_angle = i * section_angle
+
+    canvas.create_arc(
+        cx - radius,
+        cy - radius,
+        cx + radius,
+        cy + radius,
+        start=start_angle,
+        extent=section_angle,
+        fill=colour,
+        outline="black"
+    )
+
+# Pointer
+canvas.create_polygon(
+    250, 30,
+    235, 60,
+    265, 60,
+    fill="black"
+)
+
+# Function to select a random colour
+def select_colour():
+    selected = random.choice(colours)
+    result_label.config(text=f"Selected colour: {selected}")
+
+# Button
+button = GUI.Button(
+    window,
+    text="SPIN!",
+    font=("Arial", 18),
+    command=select_colour
+)
+button.pack(pady=10)
+
+# Result
+result_label = GUI.Label(
+    window,
+    text="Selected colour: None",
+    font=("Arial", 16)
+)
+result_label.pack()
+
+window.mainloop()
