@@ -1,0 +1,17 @@
+import random
+from turtle import Turtle
+
+tom = Turtle()
+tom.shape('turtle')
+tom.color('green')
+tom.speed(0)
+colors=["red","yellow","green","blue","pink","purple"]
+segments=[1,5,20,25,15]
+seg = random.choice(segments)
+for x in range(seg):
+    random.choice(colors)
+    for i in range(6):
+        tom.color(colors[i])
+        tom.fd(100)
+        tom.lt(360/6)
+    tom.lt(360/seg)
